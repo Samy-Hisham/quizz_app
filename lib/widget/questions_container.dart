@@ -6,12 +6,12 @@ import 'package:quizz_app/widget/text_question.dart';
 
 class QuestionsContainer extends StatefulWidget {
   final String questionText;
-  final List<String> buttonLabels;
+  final List<String> answersButtonLabels;
 
   const QuestionsContainer({
     super.key,
     required this.questionText,
-    required this.buttonLabels,
+    required this.answersButtonLabels,
   });
 
   @override
@@ -31,13 +31,14 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
             style: AppTextStyle.medium24(color: Colors.white)),
         const SizedBox(height: 16),
         Column(
-          children: List.generate(widget.buttonLabels.length, (index) {
+          children: List.generate(widget.answersButtonLabels.length, (index) {
             final isSelected = selectedIndex == index;
 
             return GestureDetector(
               onTap: () {
                 setState(() {
-                  selectedIndex = index; // Update selected button
+                  selectedIndex = index;
+                  // Update selected button
                 });
               },
               child: Container(
@@ -52,7 +53,8 @@ class _QuestionsContainerState extends State<QuestionsContainer> {
                   ),
                 ),
                 child: AnswerContainer(
-                    isSelected: isSelected, text: widget.buttonLabels[index]),
+                    isSelected: isSelected
+                    , text: widget.answersButtonLabels[index]),
               ),
             );
           }),

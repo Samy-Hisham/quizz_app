@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quizz_app/model/question_model.dart';
 import 'package:quizz_app/styles/app_colors.dart';
 
-class QuestionNumberContainer extends StatelessWidget {
-  const QuestionNumberContainer({super.key, required this.text, required this.Image});
+import '../styles/app_images.dart';
 
-  final String text;
-  final String Image;
-  // final int questionNumber = 1;
+class QuestionHeader extends StatelessWidget {
+  const QuestionHeader({super.key, required this.questionModel, required this.index});
+
+  final int index;
+  final QuestionModel questionModel;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,11 +31,26 @@ class QuestionNumberContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           spacing: 8,
           children: [
-            SvgPicture.asset(Image),
+            SvgPicture.asset(getImage),
             Text(
-              text,
+              'Question ${index + 1}',
             ),
           ],
         ));
+  }
+
+  String get getImage {
+    switch (index) {
+      case 0:
+        return AppImages.q1;
+      case 1:
+        return AppImages.q2;
+      case 2:
+        return AppImages.q3;
+      case 3:
+        return AppImages.q4;
+      default:
+        return AppImages.q1;
+    }
   }
 }
